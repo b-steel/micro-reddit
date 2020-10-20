@@ -18,4 +18,16 @@ class Post(models.Model):
     body = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified_on = models.DateTimeField(auto_now=True)
+
+class Comment(models.Model):
+    author = models.ForeignKey(User, 
+        on_delete=models.SET(get_sentinel_user),
+        )
+    post = models.ForeignKey(Post, 
+        on_delete=models.CASCADE,
+        )
+    text = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    last_modified_on = models.DateTimeField(auto_now=True)
+    
     
